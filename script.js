@@ -7,3 +7,4 @@ fetch("https://liturgia.up.railway.app/")
     `;
   })
   .catch(error => console.error("Erro ao carregar a liturgia:", error));
+

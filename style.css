@@ -1,8 +1,18 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
 }
-h1 {
-    color: #4A90E2;
+.calendar th, .calendar td {
+    padding: 8px;
+    text-align: center;
+}
+.calendar th {
+    background-color: #f2f2f2;
+}
+.calendar td a {
+    text-decoration: none;
+    color: inherit;
+}
+.calendar td[style*="background-color"] {
+    font-weight: bold;
 }

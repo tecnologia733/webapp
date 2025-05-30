@@ -1,18 +1,44 @@
-.calendar {
-    width: 100%;
-    border-collapse: collapse;
+body {
+    font-family: "Merriweather", serif;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: justify;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
 }
-.calendar th, .calendar td {
-    padding: 8px;
+
+h2 {
     text-align: center;
+    color: #4A90E2;
 }
-.calendar th {
-    background-color: #f2f2f2;
+
+h3 {
+    color: #D35400;
+    margin-top: 20px;
 }
-.calendar td a {
-    text-decoration: none;
-    color: inherit;
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
 }
-.calendar td[style*="background-color"] {
+
+p em {
+    display: block;
+    text-align: center;
     font-weight: bold;
+    color: #27AE60;
+}
+
+.calendar th {
+    background-color: #4A90E2;
+    color: white;
+}
+
+.box {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }

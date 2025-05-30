@@ -8,7 +8,7 @@ fetch("https://liturgia.up.railway.app/v2/")
   .then(data => {
     let liturgiaHTML = `<h2>${data.liturgia} - ${data.data}</h2>`;
 
-    // Antífona de Entrada
+    // Antífona de Entrada em negrito e na mesma linha
     if (data.antifonas?.entrada) {
       liturgiaHTML += `<p><strong>Antífona de Entrada</strong> - ${data.antifonas.entrada}</p>`;
     }
@@ -19,23 +19,23 @@ fetch("https://liturgia.up.railway.app/v2/")
     }
 
     // Primeira Leitura
-    if (data.leituras?.primeiraLeitura) {
-      liturgiaHTML += `<p><strong>Primeira Leitura - ${data.leituras.primeiraLeitura.referencia}</strong> - ${data.leituras.primeiraLeitura.titulo} - ${data.leituras.primeiraLeitura.texto.replace(/\n/g, "<br>")}</p>`;
+    if (data.primeiraLeitura) {
+      liturgiaHTML += `<p><strong>Primeira Leitura - ${data.primeiraLeitura.referencia}</strong> - ${data.primeiraLeitura.titulo} - ${data.primeiraLeitura.texto.replace(/\n/g, "<br>")}</p>`;
     }
 
     // Salmo
-    if (data.leituras?.salmo) {
-      liturgiaHTML += `<p><strong>Salmo - ${data.leituras.salmo.referencia}</strong> - ${data.leituras.salmo.refrao} - ${data.leituras.salmo.texto.replace(/\n/g, "<br>")}</p>`;
+    if (data.salmo) {
+      liturgiaHTML += `<p><strong>Salmo - ${data.salmo.referencia}</strong> - ${data.salmo.refrao} - ${data.salmo.texto.replace(/\n/g, "<br>")}</p>`;
     }
 
     // Segunda Leitura (se houver)
-    if (data.leituras?.segundaLeitura && data.leituras.segundaLeitura !== "Não há segunda leitura hoje!") {
-      liturgiaHTML += `<p><strong>Segunda Leitura - ${data.leituras.segundaLeitura.referencia}</strong> - ${data.leituras.segundaLeitura.titulo} - ${data.leituras.segundaLeitura.texto.replace(/\n/g, "<br>")}</p>`;
+    if (data.segundaLeitura && data.segundaLeitura !== "Não há segunda leitura hoje!") {
+      liturgiaHTML += `<p><strong>Segunda Leitura - ${data.segundaLeitura.referencia}</strong> - ${data.segundaLeitura.titulo} - ${data.segundaLeitura.texto.replace(/\n/g, "<br>")}</p>`;
     }
 
     // Evangelho
-    if (data.leituras?.evangelho) {
-      liturgiaHTML += `<p><strong>Evangelho - ${data.leituras.evangelho.referencia}</strong> - ${data.leituras.evangelho.titulo} - ${data.leituras.evangelho.texto.replace(/\n/g, "<br>")}</p>`;
+    if (data.evangelho) {
+      liturgiaHTML += `<p><strong>Evangelho - ${data.evangelho.referencia}</strong> - ${data.evangelho.titulo} - ${data.evangelho.texto.replace(/\n/g, "<br>")}</p>`;
     }
 
     document.getElementById("liturgia").innerHTML = liturgiaHTML;

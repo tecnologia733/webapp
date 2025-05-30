@@ -1,43 +1,34 @@
 fetch("https://liturgia.up.railway.app/v2/")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Erro na API: ${response.status}`);
-    }
-    return response.json();
-  })
+  .then(response => response.json())
   .then(data => {
-    if (!data || Object.keys(data).length === 0) {
-      throw new Error("Nenhum dado encontrado na API.");
+    let liturgiaHTML = `<h2>${data.liturgia} - ${data.data}</h2>`;
+
+    // Antífona de Entrada
+    if (data.antifonas && data.antifonas.entrada) {
+      liturgiaHTML += `<p><strong>Antífona de Entrada</strong> - ${data.antifonas.entrada}</p>`;
     }
 
-    let liturgiaHTML = `<h2>${data.liturgia} - ${data.data}</h2>
-                        <p><strong>Cor Litúrgica:</strong> ${data.cor}</p>`;
+    // Oração do Dia
+    liturgiaHTML += `<p><strong>Oração do Dia</strong> - ${data.oracoes.coleta}</p>`;
 
-    // Exibir todas as orações
-    if (data.oracoes) {
-      liturgiaHTML += `<h3>Coleta</h3><p>${data.oracoes.coleta}</p>`;
-      liturgiaHTML += `<h3>Oferendas</h3><p>${data.oracoes.oferendas}</p>`;
-      liturgiaHTML += `<h3>Comunhão</h3><p>${data.oracoes.comunhao}</p>`;
+    // Primeira Leitura
+    if (data.leituras && data.leituras.primeiraLeitura) {
+      liturgiaHTML += `<p><strong>Primeira Leitura - ${data.leituras.primeiraLeitura.referencia}</strong> - ${data.leituras.primeiraLeitura.titulo} - ${data.leituras.primeiraLeitura.texto.replace(/\n/g, "<br>")}</p>`;
     }
 
-    // Exibir todas as leituras
-    if (data.leituras) {
-      Object.keys(data.leituras).forEach(tipoLeitura => {
-        data.leituras[tipoLeitura].forEach(leitura => {
-          liturgiaHTML += `<h3>${tipoLeitura}</h3>
-                           <p><strong>${leitura.referencia}</strong></p>
-                           <p>${leitura.titulo}</p>
-                           <p>${leitura.texto.replace(/\n/g, "<br>")}</p>`;
-        });
-      });
+    // Salmo
+    if (data.leituras && data.leituras.salmo) {
+      liturgiaHTML += `<p><strong>Salmo - ${data.leituras.salmo.referencia}</strong> - ${data.leituras.salmo.refrao} - ${data.leituras.salmo.texto.replace(/\n/g, "<br>")}</p>`;
     }
 
-    // Exibir todas as antífonas
-    if (data.antifonas) {
-      liturgiaHTML += `<h3>Antífonas</h3>`;
-      Object.keys(data.antifonas).forEach(tipo => {
-        liturgiaHTML += `<h4>${tipo}</h4><p>${data.antifonas[tipo]}</p>`;
-      });
+    // Segunda Leitura (se houver)
+    if (data.leituras && data.leituras.segundaLeitura && data.leituras.segundaLeitura !== "Não há segunda leitura hoje!") {
+      liturgiaHTML += `<p><strong>Segunda Leitura - ${data.leituras.segundaLeitura.referencia}</strong> - ${data.leituras.segundaLeitura.titulo} - ${data.leituras.segundaLeitura.texto.replace(/\n/g, "<br>")}</p>`;
+    }
+
+    // Evangelho
+    if (data.leituras && data.leituras.evangelho) {
+      liturgiaHTML += `<p><strong>Evangelho - ${data.leituras.evangelho.referencia}</strong> - ${data.leituras.evangelho.titulo} - ${data.leituras.evangelho.texto.replace(/\n/g, "<br>")}</p>`;
     }
 
     document.getElementById("liturgia").innerHTML = liturgiaHTML;

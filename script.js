@@ -11,7 +11,7 @@ fetch("https://liturgia.up.railway.app/v2/")
     // Antífona de Entrada
     if (data.antifonas?.entrada) {
       liturgiaHTML += `<p><strong>Antífona de Entrada</strong> 
-      ${data.antifonas.entrada}</p><br>`;
+      <p>${data.antifonas.entrada}</p><br>`;
     }
 
     // Oração do Dia

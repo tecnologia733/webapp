@@ -6,7 +6,7 @@ fetch("https://liturgia.up.railway.app/v2/")
     return response.json();
   })
   .then(data => {
-    let liturgiaHTML = `<h2>${data.liturgia} - ${data.data}</h2>`;
+    let liturgiaHTML = `<h2>${data.data} - ${data.liturgia}</h2>`;
 
     // Antífona de Entrada
     if (data.antifonas?.entrada) {
